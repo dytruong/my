@@ -1,58 +1,150 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive HTML Blogs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Heritage Bulletin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #0d1117;
-      --bg-glass: rgba(22, 27, 34, 0.7);
-      --text-main: #c9d1d9;
-      --border-color: #30363d;
-      --primary-color: #58a6ff;
+      --ink: #201916;
+      --ink-soft: #5b4d43;
+      --ink-faint: #8a7869;
+      --rule: rgba(74, 52, 39, 0.18);
+      --accent: #8d2f23;
+      --display: 'Cormorant Garamond', serif;
+      --body: 'Source Serif 4', serif;
+      --shadow: 0 22px 60px rgba(50, 34, 24, 0.12);
     }
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
+      margin: 0;
+      font-family: var(--body);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(141, 47, 35, 0.08), transparent 28%),
+        linear-gradient(180deg, #f8f2e8 0%, #f1e8d9 100%);
+      line-height: 1.7;
     }
-    h1 { color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 2rem; }
-    .glass-panel {
-      background: var(--bg-glass);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: all 0.2s;
+    .page {
+      width: min(980px, calc(100% - 24px));
+      margin: 16px auto 32px;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(255, 252, 247, 0.97), rgba(244, 235, 221, 0.95));
+      box-shadow: var(--shadow);
     }
-    .glass-panel:hover {
-      box-shadow: 0 4px 20px rgba(88,166,255,0.1);
-      transform: translateY(-2px);
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink-faint);
     }
-    a { color: var(--primary-color); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500; }
-    .btn-outline { border: 1px solid var(--border-color); color: var(--text-main); }
-    .btn-outline:hover { color: #fff; border-color: #fff; text-decoration: none; }
+    .brand {
+      margin: 8px 0 10px;
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 5.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+    }
+    .deck {
+      max-width: 34rem;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+    }
+    .stories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .story-card {
+      padding: 22px;
+      border: 1px solid var(--rule);
+      border-radius: 22px;
+      background: rgba(255, 251, 245, 0.82);
+      box-shadow: var(--shadow);
+    }
+    .story-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+    p {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+    }
+    .story-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--ink-faint);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff8f3;
+      background: var(--accent);
+    }
+    @media (max-width: 640px) {
+      .page {
+        width: min(100%, calc(100% - 16px));
+        margin: 8px auto 24px;
+        padding: 18px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>My Interactive Blogs</h1>
-  <div id="posts">
-    
-      <article class="glass-panel" style="margin-bottom: 20px;">
-        <h2><a href="/my/k8s-networking/">k8s-networking</a></h2>
-        <p style="color: #8b949e; font-size: 0.9em;">Published on: 3/30/2026</p>
-        <a href="/my/k8s-networking/" class="btn btn-outline" style="margin-top: 10px; display: inline-block;">View Live HTML</a>
-      </article>
-    
-  </div>
+  <main class="page">
+    <div class="eyebrow">GitHub HTML blog</div>
+    <h1 class="brand">Heritage Bulletin</h1>
+    <p class="deck">HTML posts stored as index.html in dytruong/my.</p>
+    <section class="stories">
+      
+          <article class="story-card">
+            <div class="story-kicker">HTML post</div>
+            <h2><a href="/my/hello/">Hello</a></h2>
+            <p>HI</p>
+            <div class="story-meta">
+              <span>30 tháng 3, 2026</span>
+              <span>1 min read</span>
+            </div>
+            <a href="/my/hello/" class="btn btn-primary">Open post</a>
+          </article>
+        
+          <article class="story-card">
+            <div class="story-kicker">Post</div>
+            <h2><a href="/my/k8s-networking/">k8s-networking</a></h2>
+            <p>Saved from your GitHub HTML blog workflow.</p>
+            <div class="story-meta">
+              <span>30 tháng 3, 2026</span>
+              <span>5 min read</span>
+            </div>
+            <a href="/my/k8s-networking/" class="btn btn-primary">Open post</a>
+          </article>
+        
+    </section>
+  </main>
 </body>
 </html>
-    
