@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello</title>
+  <meta name="description" content="HI">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --card: rgba(255,255,255,0.7);
+      --card-strong: rgba(255,255,255,0.9);
+      --ink: #1a1714;
+      --muted: #6c655d;
+      --line: rgba(31, 23, 20, 0.1);
+      --accent: #ff6b57;
+      --accent-2: #f3c86a;
+      --shadow: 0 24px 80px rgba(42, 31, 24, 0.12);
+      --display: 'Manrope', sans-serif;
+      --body: 'Source Serif 4', serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.75;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,107,87,0.16), transparent 22%),
+        radial-gradient(circle at 85% 18%, rgba(243,200,106,0.22), transparent 18%),
+        linear-gradient(180deg, #fbf8f2 0%, #f3ede4 100%);
+    }
+    .frame {
+      width: min(1120px, calc(100% - 24px));
+      margin: 12px auto 28px;
+      padding: 12px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.42);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .shell {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(248,244,237,0.92));
+    }
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--display);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+    }
+    .brand-name {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+    }
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font: 700 0.92rem var(--display);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), #ff8757);
+      box-shadow: 0 12px 28px rgba(255,107,87,0.22);
+    }
+    .btn-outline {
+      color: var(--ink);
+      border-color: var(--line);
+      background: rgba(255,255,255,0.8);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 24px;
+      padding: 28px 22px 18px;
+      align-items: center;
+    }
+    .hero-copy {
+      max-width: 40rem;
+    }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font: 700 0.75rem var(--display);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .headline {
+      margin: 0 0 12px;
+      font: 800 clamp(2.7rem, 6vw, 5rem)/0.92 var(--display);
+      letter-spacing: -0.06em;
+      text-wrap: balance;
+    }
+    .standfirst {
+      margin: 0;
+      max-width: 34rem;
+      font: 500 clamp(1rem, 1.8vw, 1.15rem)/1.7 var(--display);
+      color: var(--muted);
+    }
+    .hero-art {
+      position: relative;
+      min-height: 260px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 20% 22%, rgba(255,255,255,0.88), transparent 22%),
+        radial-gradient(circle at 76% 24%, rgba(243,200,106,0.72), transparent 18%),
+        radial-gradient(circle at 64% 68%, rgba(255,107,87,0.58), transparent 22%),
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(249, 236, 213, 0.95));
+      border: 1px solid rgba(255,255,255,0.65);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-art::before,
+    .hero-art::after {
+      content: '';
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      animation: drift 8s ease-in-out infinite;
+    }
+    .hero-art::before {
+      inset: 18px 18px auto auto;
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.1));
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+    .hero-art::after {
+      left: 24px;
+      bottom: 24px;
+      width: 190px;
+      height: 56px;
+      background: rgba(26, 23, 20, 0.08);
+      animation-duration: 10s;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      opacity: 0.72;
+    }
+    .hero-grid span {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.7);
+      animation: pulse 4.2s ease-in-out infinite;
+    }
+    .hero-grid span:nth-child(3n) { background: rgba(255,107,87,0.16); }
+    .hero-grid span:nth-child(4n) { background: rgba(243,200,106,0.18); }
+    .meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 22px 22px;
+    }
+    .meta-chip {
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+      font: 700 0.83rem var(--display);
+      color: var(--muted);
+    }
+    .article-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+      padding: 0 22px 24px;
+    }
+    .article {
+      max-width: 760px;
+      color: #4f4840;
+      font-size: clamp(1.08rem, 1.6vw, 1.18rem);
+    }
+    .article p { margin: 0 0 1.25rem; }
+    .article h2,
+    .article h3,
+    .article h4 {
+      margin: 2rem 0 0.8rem;
+      color: var(--ink);
+      font-family: var(--display);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+    .article h2 { font-size: clamp(2rem, 3vw, 2.8rem); }
+    .article h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+    .article img {
+      width: 100%;
+      margin: 1.8rem 0;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .interactive-wrap {
+      margin-top: 0.5rem;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.6));
+    }
+    .interactive-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .interactive-title {
+      font: 800 1.1rem var(--display);
+      letter-spacing: -0.04em;
+    }
+    .interactive-stage {
+      overflow: hidden;
+      min-height: 72vh;
+      border-radius: 22px;
+      background: var(--card-strong);
+      box-shadow: inset 0 0 0 1px rgba(31,23,20,0.06);
+    }
+    .interactive-stage:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      padding: 16px;
+      background: #fff;
+    }
+    .interactive-html,
+    .interactive-iframe {
+      width: 100%;
+      min-height: 72vh;
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+    .footer-note {
+      padding: 0 22px 24px;
+      color: var(--muted);
+      font: 600 0.82rem var(--display);
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-8px) translateX(3px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translateY(0px); opacity: 0.72; }
+      50% { transform: translateY(-3px); opacity: 1; }
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-art { min-height: 220px; }
+    }
+    @media (max-width: 640px) {
+      .frame {
+        width: min(100%, calc(100% - 12px));
+        margin: 6px auto 18px;
+        padding: 6px;
+      }
+      .masthead,
+      .hero,
+      .meta,
+      .article-shell,
+      .footer-note { padding-left: 16px; padding-right: 16px; }
+      .top-actions,
+      .top-actions .btn,
+      .interactive-head .btn { width: 100%; }
+      .interactive-html,
+      .interactive-iframe,
+      .interactive-stage { min-height: 58vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="shell">
+      <header class="masthead">
+        <a href="../" class="brand">
+          <span class="brand-badge"></span>
+          <span class="brand-name">Heritage Bulletin</span>
+        </a>
+        <div class="top-actions">
+          <a class="btn btn-outline" href="../">Back to blog</a>
+          <button class="btn btn-primary" type="button" id="fullscreen-toggle">Fullscreen</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Published post</div>
+          <h1 class="headline">Hello</h1>
+          <p class="standfirst">HI</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-grid">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="meta">
+        <span class="meta-chip">30 tháng 3, 2026</span>
+        <span class="meta-chip">1 min read</span>
+        <span class="meta-chip">Canvas document</span>
+      </div>
+
+      <section class="article-shell">
+        <div class="article"><p>Xin&nbsp;chào&nbsp;các&nbsp;bạn</p></div>
+        
+          <section class="interactive-wrap" aria-labelledby="interactive-demo-title">
+            <div class="interactive-head">
+              <div class="interactive-title" id="interactive-demo-title">Gemini Canvas Preview</div>
+              <button class="btn btn-outline" type="button" id="interactive-inline-toggle">Fullscreen</button>
+            </div>
+            <div class="interactive-stage" id="interactive-stage">
+              
+        <iframe
+          class="interactive-iframe"
+          title="Gemini Canvas HTML"
+          srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;vi&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;KubeNet Master: Advanced Networking&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+        .packet {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 50;
+        }
+        .node-boundary {
+            border: 2px dashed #475569;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .node-active {
+            border-color: #3b82f6;
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+        .tool-btn {
+            transition: all 0.2s ease;
+        }
+        .tool-correct {
+            background-color: #16a34a !important;
+            border-color: #22c55e !important;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+        .tool-wrong {
+            background-color: #dc2626 !important;
+            border-color: #f87171 !important;
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .hint-content {
+            display: none;
+        }
+        .hint-content.show {
+            display: block;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;bg-slate-900 text-white font-sans min-h-screen flex flex-col&quot;&gt;
+
+    &lt;header class=&quot;p-4 bg-slate-800 border-b border-slate-700 flex justify-between items-center shadow-lg&quot;&gt;
+        &lt;div&gt;
+            &lt;h1 class=&quot;text-2xl font-bold text-blue-400&quot;&gt;KubeNet Master 🌐&lt;/h1&gt;
+            &lt;p class=&quot;text-xs text-slate-400 uppercase tracking-widest&quot;&gt;Advanced Network Simulation&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex gap-6&quot;&gt;
+            &lt;div class=&quot;text-center&quot;&gt;
+                &lt;p class=&quot;text-[10px] uppercase text-slate-500&quot;&gt;Màn chơi&lt;/p&gt;
+                &lt;p id=&quot;level-display&quot; class=&quot;font-mono text-xl text-yellow-500&quot;&gt;1/5&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;text-center&quot;&gt;
+                &lt;p class=&quot;text-[10px] uppercase text-slate-500&quot;&gt;Độ ổn định&lt;/p&gt;
+                &lt;p id=&quot;health-display&quot; class=&quot;font-mono text-xl text-green-500&quot;&gt;100%&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;main class=&quot;flex-1 flex overflow-hidden&quot;&gt;
+        &lt;!-- Sidebar --&gt;
+        &lt;aside class=&quot;w-96 bg-slate-800 p-6 border-r border-slate-700 flex flex-col gap-6 overflow-y-auto&quot;&gt;
+            &lt;div id=&quot;mission-box&quot; class=&quot;bg-slate-900/50 p-4 rounded-lg border border-blue-500/30&quot;&gt;
+                &lt;h2 id=&quot;level-title&quot; class=&quot;text-lg font-bold mb-2 text-blue-300&quot;&gt;...&lt;/h2&gt;
+                &lt;p id=&quot;mission-text&quot; class=&quot;text-sm text-slate-300 leading-relaxed mb-4&quot;&gt;...&lt;/p&gt;
+                
+                &lt;div id=&quot;hint-section&quot;&gt;
+                    &lt;button onclick=&quot;toggleHint()&quot; class=&quot;text-xs text-yellow-500 hover:text-yellow-400 flex items-center gap-1 font-bold underline&quot;&gt;
+                        💡 Cần gợi ý?
+                    &lt;/button&gt;
+                    &lt;div id=&quot;hint-text&quot; class=&quot;hint-content mt-2 p-3 bg-yellow-900/20 border border-yellow-700/50 rounded text-xs text-yellow-200 leading-normal italic&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;pt-2&quot;&gt;
+                &lt;h3 class=&quot;text-xs font-bold text-slate-500 mb-3 uppercase tracking-tighter&quot;&gt;Công cụ điều phối&lt;/h3&gt;
+                &lt;div id=&quot;tools-grid&quot; class=&quot;grid grid-cols-1 gap-3&quot;&gt;
+                    &lt;button id=&quot;btn-veth&quot; onclick=&quot;handleToolClick('veth')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Gắn Virtual Ethernet (veth)&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;L2&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button id=&quot;btn-bridge&quot; onclick=&quot;handleToolClick('bridge')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Cấu hình Bridge (cbr0)&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;Switch&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button id=&quot;btn-overlay&quot; onclick=&quot;handleToolClick('overlay')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Kích hoạt VXLAN Overlay&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;Tunnel&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button id=&quot;btn-iptables&quot; onclick=&quot;handleToolClick('iptables')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Iptables DNAT (Service)&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;NAT&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button id=&quot;btn-nodeport&quot; onclick=&quot;handleToolClick('nodeport')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Mở NodePort (External)&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;Ingress&lt;/span&gt;
+                    &lt;/button&gt;
+                    &lt;button id=&quot;btn-policy&quot; onclick=&quot;handleToolClick('policy')&quot; class=&quot;tool-btn bg-slate-700 hover:bg-slate-600 p-3 rounded text-left text-sm flex items-center justify-between&quot;&gt;
+                        &lt;span&gt;Áp dụng Network Policy&lt;/span&gt;
+                        &lt;span class=&quot;text-[10px] bg-slate-900 px-1 rounded&quot;&gt;Firewall&lt;/span&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div id=&quot;feedback&quot; class=&quot;mt-auto p-4 bg-slate-900 rounded-lg border border-slate-700 text-sm text-blue-400 min-h-[60px] flex items-center shadow-inner italic&quot;&gt;
+                Khởi động console...
+            &lt;/div&gt;
+        &lt;/aside&gt;
+
+        &lt;!-- Game Canvas --&gt;
+        &lt;div id=&quot;canvas-container&quot; class=&quot;flex-1 relative bg-slate-950 p-8 overflow-hidden&quot;&gt;
+            &lt;div class=&quot;absolute inset-0&quot; style=&quot;background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 30px 30px; opacity: 0.3;&quot;&gt;&lt;/div&gt;
+
+            &lt;!-- Node 1 --&gt;
+            &lt;div id=&quot;node-1&quot; class=&quot;node-boundary absolute top-10 left-10 w-[42%] h-[85%] rounded-2xl p-6 shadow-2xl bg-slate-900/20&quot;&gt;
+                &lt;span class=&quot;absolute -top-3 left-6 bg-slate-950 px-3 text-slate-400 text-xs font-mono font-bold border border-slate-700 rounded-full&quot;&gt;NODE-01&lt;/span&gt;
+                
+                &lt;div id=&quot;pod-a&quot; class=&quot;pod absolute top-10 left-10 w-24 h-24 bg-blue-600/10 border-2 border-blue-500 rounded-xl flex flex-col items-center justify-center transition-transform hover:scale-105&quot;&gt;
+                    &lt;span class=&quot;text-[10px] font-bold text-blue-400&quot;&gt;POD-A&lt;/span&gt;
+                    &lt;span class=&quot;text-[8px] text-slate-500&quot;&gt;10.244.1.2&lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;div id=&quot;pod-b&quot; class=&quot;pod absolute bottom-10 left-10 w-24 h-24 bg-blue-600/10 border-2 border-blue-500 rounded-xl flex flex-col items-center justify-center transition-transform hover:scale-105&quot;&gt;
+                    &lt;span class=&quot;text-[10px] font-bold text-blue-400&quot;&gt;POD-B&lt;/span&gt;
+                    &lt;span class=&quot;text-[8px] text-slate-500&quot;&gt;10.244.1.3&lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;div id=&quot;bridge-1&quot; class=&quot;absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-slate-800 border-2 border-slate-600 rounded-full flex flex-col items-center justify-center opacity-20&quot;&gt;
+                    &lt;span class=&quot;text-[8px] text-slate-400 font-bold&quot;&gt;CBR0&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Node 2 --&gt;
+            &lt;div id=&quot;node-2&quot; class=&quot;node-boundary absolute top-10 right-10 w-[42%] h-[85%] rounded-2xl p-6 shadow-2xl bg-slate-900/20&quot;&gt;
+                &lt;span class=&quot;absolute -top-3 left-6 bg-slate-950 px-3 text-slate-400 text-xs font-mono font-bold border border-slate-700 rounded-full&quot;&gt;NODE-02&lt;/span&gt;
+                
+                &lt;div id=&quot;pod-c&quot; class=&quot;pod absolute top-10 right-10 w-24 h-24 bg-purple-600/10 border-2 border-purple-500 rounded-xl flex flex-col items-center justify-center transition-transform hover:scale-105&quot;&gt;
+                    &lt;span class=&quot;text-[10px] font-bold text-purple-400&quot;&gt;POD-C&lt;/span&gt;
+                    &lt;span class=&quot;text-[8px] text-slate-500&quot;&gt;10.244.2.5&lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;div id=&quot;service-lb&quot; class=&quot;absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-yellow-900/10 border-2 border-yellow-500 border-dashed rounded-xl hidden flex flex-col items-center justify-center&quot;&gt;
+                    &lt;span class=&quot;text-[8px] text-yellow-500 font-bold uppercase text-center&quot;&gt;SVC IP&lt;br&gt;10.96.0.1&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Packet --&gt;
+            &lt;div id=&quot;packet&quot; class=&quot;packet absolute w-4 h-4 bg-yellow-400 rounded-full hidden shadow-[0_0_15px_#facc15] flex items-center justify-center&quot;&gt;
+                &lt;div class=&quot;w-1.5 h-1.5 bg-white rounded-full animate-ping&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+
+    &lt;!-- Success Modal --&gt;
+    &lt;div id=&quot;success-modal&quot; class=&quot;fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] p-4 backdrop-blur-md&quot;&gt;
+        &lt;div class=&quot;bg-slate-800 border-2 border-blue-500 p-8 rounded-3xl max-w-3xl w-full shadow-2xl overflow-y-auto max-h-[95vh] fade-in&quot;&gt;
+            &lt;div class=&quot;flex items-center gap-4 mb-6&quot;&gt;
+                &lt;div class=&quot;bg-green-500/20 p-3 rounded-full&quot;&gt;
+                    &lt;svg class=&quot;w-8 h-8 text-green-500&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;3&quot; d=&quot;M5 13l4 4L19 7&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+                &lt;/div&gt;
+                &lt;h2 class=&quot;text-3xl font-black text-white tracking-tight&quot;&gt;KẾT QUẢ CHÍNH XÁC&lt;/h2&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;grid md:grid-cols-2 gap-8 mb-8&quot;&gt;
+                &lt;div&gt;
+                    &lt;h3 class=&quot;text-xs font-bold text-slate-400 uppercase tracking-widest mb-3&quot;&gt;Phân tích chuyên sâu:&lt;/h3&gt;
+                    &lt;p id=&quot;modal-explanation&quot; class=&quot;text-slate-200 text-sm leading-relaxed bg-slate-900/50 p-4 rounded-xl border border-slate-700&quot;&gt;&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;h3 class=&quot;text-xs font-bold text-blue-400 uppercase tracking-widest mb-3&quot;&gt;Mô phỏng cấu trúc:&lt;/h3&gt;
+                    &lt;div id=&quot;modal-visual&quot; class=&quot;bg-slate-950 rounded-xl p-2 border border-slate-700 min-h-[200px] flex items-center justify-center&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;button id=&quot;next-btn&quot; class=&quot;w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black text-lg transition-all shadow-xl shadow-blue-500/20 active:scale-95&quot;&gt;
+                TIẾP TỤC NHIỆM VỤ
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        let currentLevel = 1;
+        let health = 100;
+        let activeSteps = [];
+        let isTrafficRunning = false;
+
+        const levels = [
+            {
+                title: &quot;1. Intra-Node Communication&quot;,
+                mission: &quot;Pod-A muốn 'nói chuyện' với Pod-B trên cùng máy chủ. Hãy thiết lập hạ tầng mạng cơ bản nhất tại lớp 2 (Data Link) để chúng thấy nhau.&quot;,
+                hint: &quot;Sử dụng veth để tạo cổng nối và Bridge làm bộ chuyển mạch ảo nội bộ.&quot;,
+                targetSteps: ['veth', 'bridge'],
+                start: 'pod-a',
+                path: ['bridge-1', 'pod-b'],
+                explanation: &quot;Trên cùng một Node, K8s tạo ra cặp veth. Một đầu nằm trong Pod, đầu kia gắn vào Bridge (cbr0). Khi Pod-A gửi gói tin đến IP Pod-B, Bridge sẽ broadcast ARP và chuyển tiếp gói tin dựa trên địa chỉ MAC ảo.&quot;,
+                visual: `
+                    &lt;svg viewBox=&quot;0 0 400 150&quot; class=&quot;w-full h-full&quot;&gt;
+                        &lt;rect x=&quot;50&quot; y=&quot;20&quot; width=&quot;70&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#1e3a8a&quot; stroke=&quot;#3b82f6&quot;/&gt;
+                        &lt;rect x=&quot;280&quot; y=&quot;20&quot; width=&quot;70&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#1e3a8a&quot; stroke=&quot;#3b82f6&quot;/&gt;
+                        &lt;circle cx=&quot;200&quot; cy=&quot;110&quot; r=&quot;20&quot; fill=&quot;#334155&quot; stroke=&quot;#94a3b8&quot;/&gt;
+                        &lt;path d=&quot;M85 50 L185 100 M215 100 L315 50&quot; stroke=&quot;#3b82f6&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;4&quot;/&gt;
+                        &lt;text x=&quot;200&quot; y=&quot;115&quot; fill=&quot;white&quot; font-size=&quot;8&quot; text-anchor=&quot;middle&quot;&gt;L2 SWITCH&lt;/text&gt;
+                    &lt;/svg&gt;`
+            },
+            {
+                title: &quot;2. Cross-Node Overlay&quot;,
+                mission: &quot;Pod-A cần gửi dữ liệu sang Pod-C ở Node-02. Dải mạng vật lý của Node không hiểu địa chỉ IP nội bộ của Pod (10.244.x).&quot;,
+                hint: &quot;Overlay (VXLAN) giúp 'đóng gói' gói tin của Pod vào bên trong gói tin của Node để đi xuyên qua mạng vật lý.&quot;,
+                targetSteps: ['overlay'],
+                start: 'pod-a',
+                path: ['bridge-1', 'node-1-edge', 'node-2-edge', 'pod-c'],
+                explanation: &quot;VXLAN tạo ra một Layer 2 ảo trên nền Layer 3. Gói tin Pod được bọc thêm Header UDP của Node. Khi sang Node bên kia, Flannel/Calico sẽ mở lớp bọc này ra để lấy gói tin gốc.&quot;,
+                visual: `
+                    &lt;svg viewBox=&quot;0 0 400 150&quot; class=&quot;w-full h-full&quot;&gt;
+                        &lt;rect x=&quot;30&quot; y=&quot;40&quot; width=&quot;100&quot; height=&quot;60&quot; rx=&quot;5&quot; fill=&quot;#0f172a&quot; stroke=&quot;#475569&quot; stroke-dasharray=&quot;4&quot;/&gt;
+                        &lt;rect x=&quot;270&quot; y=&quot;40&quot; width=&quot;100&quot; height=&quot;60&quot; rx=&quot;5&quot; fill=&quot;#0f172a&quot; stroke=&quot;#475569&quot; stroke-dasharray=&quot;4&quot;/&gt;
+                        &lt;path d=&quot;M130 70 C 200 20, 200 120, 270 70&quot; stroke=&quot;#a855f7&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot;/&gt;
+                        &lt;text x=&quot;200&quot; y=&quot;130&quot; fill=&quot;#d8b4fe&quot; font-size=&quot;10&quot; text-anchor=&quot;middle&quot;&gt;TUNNEL VXLAN&lt;/text&gt;
+                    &lt;/svg&gt;`
+            },
+            {
+                title: &quot;3. Cluster Service Proxy&quot;,
+                mission: &quot;Người dùng truy cập qua Service ClusterIP (10.96.0.1). Hãy điều phối gói tin này đến đúng Pod-C đang chạy.&quot;,
+                hint: &quot;Iptables DNAT sẽ thay đổi 'Destination IP' từ IP ảo của Service thành IP thực của Pod.&quot;,
+                targetSteps: ['iptables'],
+                start: 'node-1-edge',
+                path: ['service-lb', 'pod-c'],
+                explanation: &quot;Kube-proxy quản lý các luật NAT. Khi gói tin chạm vào Kernel, Iptables/IPVS sẽ chọn ngẫu nhiên (hoặc theo thuật toán) một Pod Backend và thay đổi địa chỉ đích của gói tin ngay lập tức.&quot;,
+                visual: `
+                    &lt;svg viewBox=&quot;0 0 400 150&quot; class=&quot;w-full h-full&quot;&gt;
+                        &lt;text x=&quot;50&quot; y=&quot;75&quot; fill=&quot;#eab308&quot; font-size=&quot;10&quot;&gt;Dest: SVC IP&lt;/text&gt;
+                        &lt;rect x=&quot;150&quot; y=&quot;55&quot; width=&quot;100&quot; height=&quot;40&quot; rx=&quot;8&quot; fill=&quot;#422006&quot; stroke=&quot;#eab308&quot;/&gt;
+                        &lt;text x=&quot;200&quot; y=&quot;80&quot; fill=&quot;white&quot; font-size=&quot;9&quot; text-anchor=&quot;middle&quot;&gt;DNAT RULES&lt;/text&gt;
+                        &lt;path d=&quot;M250 75 L300 75&quot; stroke=&quot;#22c55e&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrow)&quot;/&gt;
+                        &lt;text x=&quot;350&quot; y=&quot;75&quot; fill=&quot;#22c55e&quot; font-size=&quot;10&quot; text-anchor=&quot;middle&quot;&gt;Real Pod IP&lt;/text&gt;
+                    &lt;/svg&gt;`
+            },
+            {
+                title: &quot;4. External Access (NodePort)&quot;,
+                mission: &quot;Một Client từ Internet muốn truy cập vào ứng dụng. Họ chỉ biết IP của máy chủ (Node-02) và một cổng đặc biệt (30001).&quot;,
+                hint: &quot;NodePort mở một cổng trên tất cả các Node để đón traffic từ bên ngoài vào hệ thống mạng nội bộ.&quot;,
+                targetSteps: ['nodeport', 'iptables'],
+                start: 'external',
+                path: ['node-2-edge', 'service-lb', 'pod-c'],
+                explanation: &quot;NodePort là cách đơn giản nhất để tiếp nhận traffic ngoại. Nó lắng nghe trên port 30000-32767 trên IP vật lý của Node, sau đó chuyển traffic đó vào ClusterIP Service tương ứng.&quot;,
+                visual: `
+                    &lt;svg viewBox=&quot;0 0 400 150&quot; class=&quot;w-full h-full&quot;&gt;
+                        &lt;circle cx=&quot;50&quot; cy=&quot;75&quot; r=&quot;20&quot; fill=&quot;#1e293b&quot; stroke=&quot;#3b82f6&quot;/&gt;
+                        &lt;text x=&quot;50&quot; y=&quot;110&quot; fill=&quot;white&quot; font-size=&quot;8&quot; text-anchor=&quot;middle&quot;&gt;EXTERNAL CLIENT&lt;/text&gt;
+                        &lt;path d=&quot;M70 75 L270 75&quot; stroke=&quot;#3b82f6&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;5&quot;/&gt;
+                        &lt;rect x=&quot;270&quot; y=&quot;50&quot; width=&quot;80&quot; height=&quot;50&quot; rx=&quot;4&quot; fill=&quot;#1e3a8a&quot; stroke=&quot;#60a5fa&quot;/&gt;
+                        &lt;text x=&quot;310&quot; y=&quot;80&quot; fill=&quot;white&quot; font-size=&quot;8&quot; text-anchor=&quot;middle&quot;&gt;NODE PORT&lt;/text&gt;
+                    &lt;/svg&gt;`
+            },
+            {
+                title: &quot;5. Security Policy&quot;,
+                mission: &quot;Hệ thống đang bị tấn công! Pod-A không được phép gửi dữ liệu trực tiếp đến Pod-C. Hãy thiết lập rào chắn bảo vệ.&quot;,
+                hint: &quot;Network Policy hoạt động như một Firewall ở mức Pod, cho phép hoặc chặn traffic dựa trên nhãn (labels).&quot;,
+                targetSteps: ['policy'],
+                start: 'pod-a',
+                path: ['bridge-1', 'blocked'],
+                explanation: &quot;Network Policy thường được thực thi bởi CNI (như Calico hay Cilium) thông qua BPF hoặc Iptables. Nó cung cấp bảo mật 'Zero Trust', mặc định chặn tất cả nếu không được phép rõ ràng.&quot;,
+                visual: `
+                    &lt;svg viewBox=&quot;0 0 400 150&quot; class=&quot;w-full h-full&quot;&gt;
+                        &lt;rect x=&quot;50&quot; y=&quot;60&quot; width=&quot;60&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#1e3a8a&quot;/&gt;
+                        &lt;rect x=&quot;290&quot; y=&quot;60&quot; width=&quot;60&quot; height=&quot;30&quot; rx=&quot;4&quot; fill=&quot;#1e3a8a&quot;/&gt;
+                        &lt;line x1=&quot;200&quot; y1=&quot;30&quot; x2=&quot;200&quot; y2=&quot;120&quot; stroke=&quot;#ef4444&quot; stroke-width=&quot;4&quot; stroke-dasharray=&quot;8&quot;/&gt;
+                        &lt;text x=&quot;200&quot; y=&quot;20&quot; fill=&quot;#ef4444&quot; font-size=&quot;10&quot; text-anchor=&quot;middle&quot;&gt;DENY POLICY&lt;/text&gt;
+                    &lt;/svg&gt;`
+            }
+        ];
+
+        function toggleHint() {
+            document.getElementById('hint-text').classList.toggle('show');
+        }
+
+        function logFeedback(msg, type = 'info') {
+            const fb = document.getElementById('feedback');
+            fb.innerText = msg;
+            if (type === 'error') {
+                fb.className = &quot;mt-auto p-4 bg-red-900/20 rounded-lg border border-red-700/50 text-sm text-red-400 min-h-[60px] flex items-center shadow-inner&quot;;
+            } else if (type === 'success') {
+                fb.className = &quot;mt-auto p-4 bg-green-900/20 rounded-lg border border-green-700/50 text-sm text-green-400 min-h-[60px] flex items-center shadow-inner font-bold&quot;;
+            } else {
+                fb.className = &quot;mt-auto p-4 bg-slate-900 rounded-lg border border-slate-700 text-sm text-blue-400 min-h-[60px] flex items-center shadow-inner&quot;;
+            }
+        }
+
+        function handleToolClick(step) {
+            if (isTrafficRunning) return;
+            const level = levels[currentLevel - 1];
+            const btn = document.getElementById(`btn-${step}`);
+
+            if (level.targetSteps.includes(step)) {
+                if (!activeSteps.includes(step)) {
+                    activeSteps.push(step);
+                    btn.classList.add('tool-correct');
+                    logFeedback(`[Hệ thống] Đã cấu hình thành công: ${step.toUpperCase()}`, 'success');
+                    visualizeStep(step);
+                    if (activeSteps.length === level.targetSteps.length) runTraffic();
+                }
+            } else {
+                btn.classList.add('tool-wrong');
+                health -= 10;
+                updateStats();
+                logFeedback(`[Cảnh báo] ${step.toUpperCase()} không phù hợp trong kịch bản này!`, 'error');
+                setTimeout(() =&gt; btn.classList.remove('tool-wrong'), 500);
+            }
+        }
+
+        function visualizeStep(step) {
+            if (step === 'bridge') document.getElementById('bridge-1').style.opacity = '1';
+            if (step === 'iptables') document.getElementById('service-lb').classList.remove('hidden');
+            if (step === 'overlay') {
+                document.getElementById('node-1').classList.add('node-active');
+                document.getElementById('node-2').classList.add('node-active');
+            }
+            if (step === 'policy') {
+                document.getElementById('node-2').style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                document.getElementById('node-2').style.borderColor = '#ef4444';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('level-display').innerText = `${currentLevel}/${levels.length}`;
+            document.getElementById('health-display').innerText = `${health}%`;
+            if (health &lt;= 0) { alert(&quot;Hệ thống mạng sụp đổ! Resetting...&quot;); location.reload(); }
+        }
+
+        function getPointCoordinates(pointId, containerRect) {
+            if (pointId === 'external') return { x: -20, y: containerRect.height / 2 };
+            if (pointId === 'node-1-edge') return { x: containerRect.width * 0.44, y: containerRect.height / 2 };
+            if (pointId === 'node-2-edge') return { x: containerRect.width * 0.56, y: containerRect.height / 2 };
+            if (pointId === 'blocked') return { x: containerRect.width * 0.5, y: containerRect.height / 2 };
+            
+            const el = document.getElementById(pointId);
+            if (!el) return { x: 0, y: 0 };
+            const rect = el.getBoundingClientRect();
+            return {
+                x: rect.left - containerRect.left + rect.width / 2,
+                y: rect.top - containerRect.top + rect.height / 2
+            };
+        }
+
+        function runTraffic() {
+            isTrafficRunning = true;
+            const level = levels[currentLevel - 1];
+            const packet = document.getElementById('packet');
+            const containerRect = document.getElementById('canvas-container').getBoundingClientRect();
+            
+            const startCoords = getPointCoordinates(level.start, containerRect);
+            packet.style.left = `${startCoords.x}px`;
+            packet.style.top = `${startCoords.y}px`;
+            packet.classList.remove('hidden');
+
+            level.path.forEach((pointId, index) =&gt; {
+                setTimeout(() =&gt; {
+                    const coords = getPointCoordinates(pointId, containerRect);
+                    packet.style.left = `${coords.x}px`;
+                    packet.style.top = `${coords.y}px`;
+
+                    if (pointId === 'blocked') {
+                        setTimeout(() =&gt; {
+                            packet.style.backgroundColor = '#ef4444';
+                            logFeedback(&quot;[Firewall] Traffic bị chặn bởi Network Policy!&quot;, 'error');
+                            setTimeout(showSuccessModal, 800);
+                        }, 400);
+                    } else if (index === level.path.length - 1) {
+                        setTimeout(() =&gt; {
+                            logFeedback(&quot;[Thành công] Luồng dữ liệu đã được thông suốt!&quot;);
+                            showSuccessModal();
+                        }, 800);
+                    }
+                }, (index + 1) * 800);
+            });
+        }
+
+        function showSuccessModal() {
+            const level = levels[currentLevel - 1];
+            const modal = document.getElementById('success-modal');
+            document.getElementById('modal-explanation').innerText = level.explanation;
+            document.getElementById('modal-visual').innerHTML = level.visual;
+            modal.style.display = 'flex';
+            
+            document.getElementById('next-btn').onclick = () =&gt; {
+                modal.style.display = 'none';
+                currentLevel++;
+                if (currentLevel &gt; levels.length) {
+                    alert(&quot;CHÚC MỪNG! BẠN ĐÃ LÀ BẬC THẦY KUBERNETES NETWORKING!&quot;);
+                    location.reload();
+                } else {
+                    resetBoard();
+                }
+            };
+        }
+
+        function resetBoard() {
+            activeSteps = [];
+            isTrafficRunning = false;
+            document.querySelectorAll('.tool-btn').forEach(b =&gt; b.classList.remove('tool-correct', 'tool-wrong'));
+            document.getElementById('packet').classList.add('hidden');
+            document.getElementById('packet').style.backgroundColor = '#facc15';
+            document.getElementById('bridge-1').style.opacity = '0.2';
+            document.getElementById('service-lb').classList.add('hidden');
+            document.getElementById('node-1').classList.remove('node-active');
+            document.getElementById('node-2').classList.remove('node-active');
+            document.getElementById('node-2').style.borderColor = '#475569';
+            document.getElementById('node-2').style.backgroundColor = 'transparent';
+            document.getElementById('hint-text').classList.remove('show');
+            
+            const level = levels[currentLevel - 1];
+            document.getElementById('level-title').innerText = level.title;
+            document.getElementById('mission-text').innerText = level.mission;
+            document.getElementById('hint-text').innerText = level.hint;
+            updateStats();
+            logFeedback(&quot;Sẵn sàng nhận cấu hình mới...&quot;);
+        }
+
+        window.onload = resetBoard;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"
+          loading="lazy"
+        ></iframe>
+      
+            </div>
+          </section>
+      </section>
+
+      <div class="footer-note">Stored as index.html in your GitHub repository.</div>
+    </div>
+  </div>
+  <script>
+    const stage = document.getElementById('interactive-stage');
+    const buttons = [
+      document.getElementById('fullscreen-toggle'),
+      document.getElementById('interactive-inline-toggle')
+    ].filter(Boolean);
+    async function toggleFullscreen() {
+      if (!stage) return;
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+        return;
+      }
+      if (stage.requestFullscreen) await stage.requestFullscreen();
+    }
+    buttons.forEach((button) => button.addEventListener('click', toggleFullscreen));
+  </script>
+</body>
+</html>
