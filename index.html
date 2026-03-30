@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive HTML Blogs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --bg-glass: rgba(22, 27, 34, 0.7);
+      --text-main: #c9d1d9;
+      --border-color: #30363d;
+      --primary-color: #58a6ff;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 { color: #fff; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 2rem; }
+    .glass-panel {
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.2s;
+    }
+    .glass-panel:hover {
+      box-shadow: 0 4px 20px rgba(88,166,255,0.1);
+      transform: translateY(-2px);
+    }
+    a { color: var(--primary-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 500; }
+    .btn-outline { border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-outline:hover { color: #fff; border-color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>My Interactive Blogs</h1>
+  <div id="posts">
+    
+      <article class="glass-panel" style="margin-bottom: 20px;">
+        <h2><a href="/my/k8s-networking/">k8s-networking</a></h2>
+        <p style="color: #8b949e; font-size: 0.9em;">Published on: 3/30/2026</p>
+        <a href="/my/k8s-networking/" class="btn btn-outline" style="margin-top: 10px; display: inline-block;">View Live HTML</a>
+      </article>
+    
+  </div>
+</body>
+</html>
+    
